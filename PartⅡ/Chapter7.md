@@ -64,7 +64,9 @@ public class ParallelStreamBenchMark {
     }
 }
 ~~~
-![스크린샷 2025-01-12 오전 3.40.06.png](..%2F..%2F..%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202025-01-12%20%EC%98%A4%EC%A0%84%203.40.06.png)
+
+![image](https://github.com/user-attachments/assets/b857aa47-59d0-436b-99a2-281b6b918b4e)
+
 ~~~java
 @Benchmark
 public long iterativeSum() {
@@ -75,14 +77,18 @@ public long iterativeSum() {
     return result;
 }
 ~~~
-![스크린샷 2025-01-12 오전 3.50.06.png](..%2F..%2F..%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202025-01-12%20%EC%98%A4%EC%A0%84%203.50.06.png)
+
+![image](https://github.com/user-attachments/assets/a704197a-9ca0-44f7-ae08-85f8b1c67236)
+
 ~~~java
 @Benchmark
 public long parallelSum() {
     return Stream.iterate(1L, i -> i + 1).limit(N).parallel().reduce(0L, Long::sum);
 }
 ~~~
-![스크린샷 2025-01-12 오전 3.53.56.png](..%2F..%2F..%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202025-01-12%20%EC%98%A4%EC%A0%84%203.53.56.png)
+
+![image](https://github.com/user-attachments/assets/0487e867-b284-45fe-b850-b8ee60680326)
+* 
 * 병렬 버전이 순차 버전에 비해 느린 결과가 나온 이유는?
   * 반복 결과로 박싱된 객체가 만들어지므로 숫자를 더하려면 언박싱을 해야한다.
   * 반복 작업은 병렬로 수행할 수 있는 독립 단위로 나누기 어렵다.
@@ -103,7 +109,9 @@ public long rangeSum() {
     return LongStream.rangeClosed(1, N).reduce(0L, Long::sum);
 }
 ~~~
-![스크린샷 2025-01-12 오전 4.06.15.png](..%2F..%2F..%2F%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202025-01-12%20%EC%98%A4%EC%A0%84%204.06.15.png)
+
+![image](https://github.com/user-attachments/assets/91425a70-0655-43b2-bbc9-72bb5388d152)
+
 - 올바른 자료구조를 선택해야 병렬 실행도 최적의 성능을 발휘한다.
 
 ### 7.1.3 병렬 스트림의 올바른 사용법
@@ -174,7 +182,7 @@ if(태스크가 충분히 작거나 더이상 분할할 수 없으면) {
 포크/조인 분할 전략에서는 주어진 서브테스크를 더 분할할 것인지 결정할 기준을 정해야 한다.
 
 ### 7.2.3 작업 훔치기
-- 이론적으로는 CPU 코어 개수만큼 병렬화된 태스크로 작업 부하를 부낳ㄹ하면 모든 코어에서 태스크를 실행할 것이고, 같은 시간에 ㅈ동료될 것이라고 생각할 수 있다. 
+- 이론적으로는 CPU 코어 개수만큼 병렬화된 태스크로 작업 부하를 분할하면 모든 코어에서 태스크를 실행할 것이고, 같은 시간에 종료될 것이라고 생각할 수 있다. 
 - 하지만 다양한 이유로 각각의 서브태스크의 작업 완료 시간이 크게 달라질 수 있다.
 - `포크/조인 프레임워크` 에서는 `작업 훔치기` 라는 기법으로 이 문제를 해결한다.
   - ForJoinPool 의 모든 스레드를 거의 공정하게 분할한다.
@@ -206,7 +214,7 @@ public interface Spliterator<T> {
 
 ### Spliterator 특성
 - Spliterator 의 특성
-- Characteristics 추상 메서드로 정의하며, Spliterator 자체 득성 집합을 포함하는 int 를 반환한다. 
+- Characteristics 추상 메서드로 정의하며, Spliterator 자체 특성 집합을 포함하는 int 를 반환한다.
 
 | 특성         | 의미                                                              |
 |------------|-----------------------------------------------------------------|
@@ -284,6 +292,9 @@ private int countWord(Stream<Character> stream) {
 ~~~
 - 문자열 스트림의 리듀싱 연산으로 변경한 모습
 
+- 원하는 결과가 나오지 않음
+- 순차 스트림을 병렬 스트림으로 바꿀 때 스트림 분할 위치에 따라 잘못된 결과가 나온다.
+- 문자열을 임의의 위치에서 분할하지 말고 단어가 끝나는 위치에서만 분할하는 방법으로 문제 해결 가능
 ### WordCounter 병렬로 수행하기
 
 ~~~java
@@ -369,9 +380,7 @@ class WordCounterSpliterator implements Spliterator<Character> { // Spliterator 
   }
 }
 ~~~
-- 원하는 결과가 나오지 않음
-- 순차 스트림을 병렬 스트림으로 바꿀 때 스트림 분할 위치에 따라 잘못된 결과가 나온다.
-- 문자열을 임의의 위치에서 분할하지 말고 단어가 끝나는 위치에서만 분할하는 방법으로 문제 해결 가능
+
 
 ## 7.4 마치며
 - 내부 반복을 이용하면 명시적으로 다른 스레드를 사용하지 않고도 스크림을 병렬로 처리할 수 있다.
