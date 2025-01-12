@@ -258,7 +258,7 @@ specialMenu.stream().filter(Dish::isVegetarian).findAny().ifPresent(d -> System.
 > `T get()` : 값이 존재하면 값을 반환 / 값이 없으면 NoSuchElementException 을 일으킨다.  
 > `T orElse(T other)` : 값이 있으면 값을 반환 / 없으면 기본값을 반환한다.
 
-### 5.4.4 첫 번째 오소 찾기
+### 5.4.4 첫 번째 요소 찾기
 - 리스트 또는 정렬된 연속 데이터로부터 생성된 스트림처럼 일부 스트림에 `논리적 아이템순서` 가 정해져 있는 경우 
 - 첫 번째 요소 찾기
 
@@ -473,7 +473,7 @@ int[] numbers = {2, 3, 5, 7, 11, 13};
 int sum = Arrays.stream(numbers).sum();
 ~~~
 
-### 5.8.4 파일로ㅑ 스트림 만들기
+### 5.8.4 파일로 스트림 만들기
 - java.nio.file.File의 많은 정적 메서드가 스트림을 반환한다.
 
 ~~~java
@@ -529,7 +529,7 @@ Stream.generate(Math::random)
 - filter, distinct, takeWhile, dropWhile, skip, limit 메소드로 스트림을 필터링하거나 자를 수 있다.
 - map, flatMap 메서드로 스트림의 요소를 추출하거나 변환할 수 있다.
 - findFirst, findAny  메서드로 스트림의 요소를 검색할 수 있다. allMatch, noneMatch, anyMatch 메서드를 이용해서 주어진 프레디케이트와 일치하는 요소를 스트림에서 검색할 수 있다.
-- 이들 메서드는 소트서킷, 즉 결과를 찾는 즉시 반환하며, 전체 스트림을 처리하지는 않는다.
+- 이들 메서드는 쇼트서킷, 즉 결과를 찾는 즉시 반환하며, 전체 스트림을 처리하지는 않는다.
 - reduce 메서드로 스트림의 모든 요소를 반복 조합하며 값을 도출할 수 있다.
 - filter, map 등은 상태를 저장하지 않는 상태 없는 연산 이다. reduce 같은 연산은 값을 계산하는데 필요한 상태를 저장한다. sorted, distinct 등의 메서드는 새로운 스트림을 반환하기에 앞서 스트림의 모든 요소를 버퍼에 저장해야 하므로, 상태 있는 연산이라고 부른다.
 - IntStream, DoubleStream, LongStream 은 기본형 특화 스트림이다. 각각의 기본형에 맞에 특화되어 있다.
