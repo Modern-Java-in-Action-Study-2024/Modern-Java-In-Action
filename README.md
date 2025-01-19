@@ -13,12 +13,12 @@ Part Ⅱ 함수형 데이터 처리
 - [x] Chapter 4 - 스트림 소개
 - [x] Chapter 5 - 스트림 활용
 - [x] Chapter 6 - 스트림으로 데이터 수집
-- [ ] Chapter 7 - 병렬 데이터 처리와 성능
+- [x] Chapter 7 - 병렬 데이터 처리와 성능
 
 <br>
 
 Part Ⅲ 스트림과 람다를 이용한 효과적 프로그래밍
-- [ ] Chapter 8 - 컬렉션 API 개선
+- [x] Chapter 8 - 컬렉션 API 개선
 - [ ] Chapter 9 - 리팩터링, 테스팅, 디버깅
 - [ ] Chatper 10 - 람다를 이용한 도메인 전용 언어
 
