@@ -19,13 +19,13 @@ Part Ⅱ 함수형 데이터 처리
 
 Part Ⅲ 스트림과 람다를 이용한 효과적 프로그래밍
 - [x] Chapter 8 - 컬렉션 API 개선
-- [ ] Chapter 9 - 리팩터링, 테스팅, 디버깅
+- [x] Chapter 9 - 리팩터링, 테스팅, 디버깅
 - [ ] Chatper 10 - 람다를 이용한 도메인 전용 언어
 
 <br>
 
 Part Ⅳ 매일 자바와 함께
-- [ ] Chapter 11 - null 대신 Optional 클래스
+- [x] Chapter 11 - null 대신 Optional 클래스
 - [ ] Chapter 12 - 새로운 날짜와 시간 API
 - [ ] Chapter 13 - 디폴트 메서드
 - [ ] Chapter 14 - 자바 모듈 시스템
